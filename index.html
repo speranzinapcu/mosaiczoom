@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>DZI Viewer</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #viewer {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <!-- OpenSeadragon from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js"></script>
+
+</head>
+<body>
+  <div id="viewer"></div>
+
+  <script>
+    const viewer = OpenSeadragon({
+      id: "viewer",
+      prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/",
+      showNavigationControl: false, // pure image
+      gestureSettingsMouse: {
+        clickToZoom: true,
+        dblClickToZoom: true,
+        scrollToZoom: true
+      },
+      // Just point to the .dzi file:
+      tileSources: "mosaic2_dzi.dzi"
+    });
+
+    // Spacebar = reset view
+    window.addEventListener("keydown", (e) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        viewer.viewport.goHome();
+      }
+    });
+  </script>
+</body>
+</html>
